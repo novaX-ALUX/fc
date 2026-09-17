@@ -18,6 +18,7 @@
 | [AF-F7_mini](boards/AF-F7_mini/ardupilot/) | FC | `STM32F767xx` | 6201 | 1.3.0 | ArduPilot |
 | [AF-H7_nano](boards/AF-H7_nano/ardupilot/) | FC | `STM32H743xx` | 6200 | 1.2.3 | ArduPilot + Betaflight config |
 | [AF-H7E](boards/AF-H7E/ardupilot/) | FC | `STM32H743xx` | 6202 | 1.3.0 | ArduPilot |
+| [AF-H7E_Lite](boards/AF-H7E_Lite/ardupilot/) | FC | `STM32H743xx` | 6207 | 0.1.0 | ArduPilot |
 <!-- board-inventory:end -->
 
 ## 実際の構造
@@ -33,7 +34,8 @@ fc/
 │  ├─ AF-F4_T10_nano/
 │  ├─ AF-F7_mini/
 │  ├─ AF-H7_nano/
-│  └─ AF-H7E/
+│  ├─ AF-H7E/
+│  └─ AF-H7E_Lite/
 ├─ firmware/
 │  └─ betaflight/    # pinned Git submodule
 ├─ patches/ardupilot/

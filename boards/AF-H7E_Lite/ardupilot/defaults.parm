@@ -1,0 +1,14 @@
+# AF-H7E Lite default parameters
+
+# ---- Frame: X quad by default ----
+FRAME_CLASS 1
+FRAME_TYPE 1
+
+# ---- SB column of the PWM header: SBUS servo output on SERIAL8 (USART6) ----
+# servo channels 1-16 at 100 kbaud; TX inversion inside the STM32H7 (no external inverter)
+SERIAL8_PROTOCOL 15
+SERIAL8_OPTIONS 2
+
+# ---- Dual CAN (DroneCAN on both buses) ----
+CAN_P1_DRIVER 1
+CAN_P2_DRIVER 1

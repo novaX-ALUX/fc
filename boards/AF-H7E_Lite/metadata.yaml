@@ -1,0 +1,33 @@
+board: AF-H7E_Lite
+platform:
+  - ardupilot
+mcu: STM32H753IIK6
+package: UFBGA-201
+bootloader_board_id: 6207
+source_tree: ../_shared/ardupilot
+board_config: boards/AF-H7E_Lite/ardupilot
+modules:
+  fmu: V6X-FM (STM32H753 + FM25V05 FRAM + SE050 secure element), same as AF-H7E
+  imu_board: V6X-IMU, same as AF-H7E
+  base_board: AF-H7E Lite carrier (no IO MCU, LAN8742 Ethernet, LTC4417 power path, 2x MCP2542 CAN)
+sensors:
+  imu1: ICM-42688-P
+  imu2: BMI088
+  imu3: ICM-20649 (population decided at production)
+  barometer: 2x ICP-20100
+  compass: RM3100 (population decided at production)
+fram: FM25V05
+ethernet: LAN8742 (100BASE-T)
+io_coprocessor: none
+outputs:
+  pwm: 12 (M1-M12; DShot on M1-M6 and M9-M12 timer groups, M7-M8 PWM/OneShot only)
+  sbus_out: SB column, SERIAL8 (USART6 TX)
+can:
+  fdcan1: MCP2542
+  fdcan2: MCP2542
+notes: >
+  Concept carrier for the AF-H7E modules without the IO co-processor. The pin
+  definition follows the parts catalog AF-H7E Lite pin table; the carrier PCB is
+  not built, so every connector pin must be verified before the first power-on.
+  No safety switch, no DSM bind (RC IN supplies 5 V only). Sensors are listed
+  directly instead of FMUV6 board detection.
