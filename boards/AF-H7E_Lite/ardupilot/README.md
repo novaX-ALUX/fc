@@ -42,6 +42,10 @@ scripts/build_ap.sh AF-H7E_Lite copter
 scripts/build_ap.sh AF-H7E_Lite plane
 ```
 
+Release: [`AF-H7E_Lite-v0.1.0`](https://github.com/novaX-ALUX/fc/releases/tag/AF-H7E_Lite-v0.1.0) is a preliminary,
+build-verified release (Copter and Plane share board id `6207` - pick the file by name). It is also
+listed in the parts catalog web updater.
+
 Verify before the first power-on:
 
 - The carrier PCB is not built yet. Every connector pin and the `M9`–`M12` MCU
