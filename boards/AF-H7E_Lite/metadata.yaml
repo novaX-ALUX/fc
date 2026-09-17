@@ -29,5 +29,6 @@ notes: >
   Concept carrier for the AF-H7E modules without the IO co-processor. The pin
   definition follows the parts catalog AF-H7E Lite pin table; the carrier PCB is
   not built, so every connector pin must be verified before the first power-on.
-  No safety switch, no DSM bind (RC IN supplies 5 V only). Sensors are listed
-  directly instead of FMUV6 board detection.
+  No safety switch. RC IN keeps the AF-H7E 5-pin pinout: RC on PI5, RSSI on PC3,
+  switched 3.3 V DSM supply on PH2 for binding. Sensors are listed directly
+  instead of FMUV6 board detection.

@@ -23,7 +23,9 @@ Differences from AF-H7E:
   - Outputs in one timer group share rate and protocol.
 - `SB` column of the PWM header = SBUS servo out on `SERIAL8` (`USART6` TX, PC6).
   Inversion is done inside the MCU (`SERIAL8_OPTIONS 2`).
-- `RC IN` = SBUS / PPM / DSM on PI5, auto-detected. No safety switch, no DSM bind power pin.
+- `RC IN` keeps the AF-H7E 5-pin pinout (5V · RC · RSSI · 3V3 · GND): SBUS / PPM / DSM on PI5,
+  auto-detected, analog RSSI on PC3 (`BOARD_RSSI_ANA_PIN 13`), switched 3.3 V for DSM satellites
+  on PH2 so DSM bind works without the IO co-processor. No safety switch.
 - Sensors are listed directly instead of FMUV6 board detection.
 - Battery monitor default: INA2xx on I2C bus 1.
 

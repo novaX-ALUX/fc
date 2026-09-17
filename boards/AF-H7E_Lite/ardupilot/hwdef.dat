@@ -12,7 +12,9 @@
 # Differences from AF-H7E:
 #   - no IOMCU: USART6 is a normal serial port (SERIAL8) wired to the SB column
 #   - no GPS & Safety port: no safety switch, no safety LED
-#   - no AD&IO port: FMU_CAP1 (PE11) and the AD&IO analog inputs are reused/removed
+#   - no AD&IO port: FMU_CAP1 (PE11) is reused as M12, ADC1_3V3 (PC3) reads RC IN RSSI
+#   - RC IN = AF-H7E 5-pin pinout (5V, RC, RSSI, 3V3 DSM, GND): RC on PI5 direct to
+#     the FMU, switched 3.3 V DSM supply on PH2 (IOMCU did this on AF-H7E)
 #   - PWM M9-M12 from free FM module timer pins (PD12, PD15, PE9, PE11)
 #   - sensors are listed directly (no FMUV6 board detection) so a board built
 #     without ICM-20649 or RM3100 still boots
@@ -122,6 +124,10 @@ PB0 SCALED3_V3V3 ADC1 SCALE(2)
 PF12 SCALED4_V3V3 ADC1 SCALE(2)
 
 PB1 VDD_5V_SENS  ADC1 SCALE(2)
+
+# RC IN pin 3 RSSI (0-3.3 V), analog 13 - the AD&IO ADC1_3V3 line on AF-H7E
+PC3 RSSI_IN ADC1 SCALE(1)
+define BOARD_RSSI_ANA_PIN 13
 
 # SPI1 - IMU1
 PA5 SPI1_SCK SPI1
@@ -272,9 +278,17 @@ PG0 HW_VER_REV_DRIVE OUTPUT LOW
 # PWM output for buzzer
 PF9 TIM14_CH1 TIM14 GPIO(77) ALARM
 
-# RC IN: SBUS / PPM / DSM receiver input, protocol auto-detected (FMU direct).
-# The connector supplies 5 V only - no switched 3.3 V Spektrum supply, so no DSM bind.
-PI5 TIM8_CH1 TIM8 RCININT PULLDOWN LOW
+# RC IN pin 2: SBUS / PPM / DSM receiver input, protocol auto-detected (FMU direct).
+# The same pin is a GPIO for the DSM bind pulses - AP_RCProtocol_DSM saves and
+# restores the pin mode around the bind.
+PI5 TIM8_CH1 TIM8 RCININT PULLDOWN LOW GPIO(74)
+define HAL_GPIO_SPEKTRUM_RC 74
+
+# RC IN pin 4: switched 3.3 V for DSM / Spektrum satellites (3.3 V LDO enable,
+# V6X VDD_3V3_SPEKTRUM_POWER_EN). Power-cycled by the bind sequence.
+PH2 SPEKTRUM_PWR OUTPUT HIGH GPIO(73)
+define HAL_GPIO_SPEKTRUM_PWR 73
+define HAL_SPEKTRUM_PWR_ENABLED 1
 
 # barometers (CUAV 6X modules)
 BARO ICP201XX I2C:0:0x64
